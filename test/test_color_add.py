@@ -1,8 +1,7 @@
-from os import environ
 import unittest
+import webcolors
 
 from color_add import color_add
-from color_add.color_add import Color
 
 from environment import environment
 
@@ -10,8 +9,8 @@ from environment import environment
 class TestColorAdd(unittest.TestCase):
 
     def test_add_black_and_black(self):
-        environment.add('black', 'black')
-        color = color_add.get_result()
-        expected_color = Color(0, 0, 0)
+        environment.set_colors('black', 'black')
+        color_result = color_add.get_result()
+        color_name_result = webcolors.hex_to_name(color_result)
 
-        self.assertEqual(expected_color, color)
+        self.assertEqual('black', color_name_result)
