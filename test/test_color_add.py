@@ -18,3 +18,9 @@ class TestColorAdd(unittest.TestCase):
         color_result = color_add.get_result()
         color_name_result = webcolors.hex_to_name(color_result)
         self.assertEqual('red', color_name_result)
+
+    def test_add_red_and_lime(self):
+        environment.set_colors('red', 'lime')
+        color_result = color_add.get_result()
+        color_name_result = webcolors.hex_to_name(color_result)
+        self.assertEqual('yellow', color_name_result)
