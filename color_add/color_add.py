@@ -4,10 +4,10 @@ from environment.environment import get_color_a, get_color_b
 def get_result():
     color_a = get_color_a()
     color_b = get_color_b()
-    color = []
-    color.append(list(get_rgb_from_hex(color_a)))
-    color.append(list(get_rgb_from_hex(color_b)))
-    color_add = [color[0][i] + color[1][i] for i in range(3)]
+    colors = []
+    colors.append(list(get_rgb_from_hex(color_a)))
+    colors.append(list(get_rgb_from_hex(color_b)))
+    color_add = add_colors(colors)
     return get_hex_from_rgb(color_add)
 
 
@@ -20,6 +20,12 @@ def get_rgb_from_hex(hex_string):
 
 def hex2int(hex_value):
     return int(hex_value, 16)
+
+
+def add_colors(colors):
+    color_added = [colors[0][i] + colors[1][i] for i in range(3)]
+    color_added = [value if value <= 255 else 255 for value in color_added]
+    return color_added
 
 
 def get_hex_from_rgb(rgb_list):
