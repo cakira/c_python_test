@@ -1,9 +1,8 @@
 import unittest
 import webcolors
 
-from color_add import color_add
-
 from environment import environment
+from color_add import color_add
 
 
 class TestColorAdd(unittest.TestCase):
