@@ -12,7 +12,9 @@
 void get_color_a(char *);
 void get_color_b(char *);
 
+static uint32_t color_hex_to_int(const char *color_hex);
 static uint32_t color_add(uint32_t color_a_int, uint32_t color_b);
+static void color_int_to_hex(uint32_t color_int, char *color_hex);
 
 void get_result(char *color_result) {
     char color_a[COLOR_HEX_MAX_LENGTH];
@@ -20,11 +22,14 @@ void get_result(char *color_result) {
 
     get_color_a(color_a);
     get_color_b(color_b);
-    uint32_t color_a_int = strtoul(color_a + 1, NULL, 16);
-    uint32_t color_b_int = strtoul(color_b + 1, NULL, 16);
-
+    uint32_t color_a_int = color_hex_to_int(color_a);
+    uint32_t color_b_int = color_hex_to_int(color_b);
     uint32_t color_result_int = color_add(color_a_int, color_b_int);
-    snprintf(color_result, COLOR_HEX_MAX_LENGTH, "#%06x", color_result_int);
+    color_int_to_hex(color_result_int, color_result);
+}
+
+static uint32_t color_hex_to_int(const char *color_hex) {
+    return strtoul(color_hex + 1, NULL, 16);
 }
 
 static uint32_t color_add(uint32_t color_a_int, uint32_t color_b_int) {
@@ -42,4 +47,8 @@ static uint32_t color_add(uint32_t color_a_int, uint32_t color_b_int) {
         blue_sum = BLUE_MASK;
     }
     return (red_sum | green_sum | blue_sum);
+}
+
+static void color_int_to_hex(uint32_t color_int, char *color_hex) {
+    snprintf(color_hex, COLOR_HEX_MAX_LENGTH, "#%06x", color_int);
 }
